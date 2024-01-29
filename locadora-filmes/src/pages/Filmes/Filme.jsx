@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate, json } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import api from "../../Services/api";
-import { CgSpinner } from "react-icons/cg"
-
+import { CgSpinner } from "react-icons/cg";
+import {toast} from "react-toastify"
 
 import "./Filme.css"
 
@@ -48,12 +48,12 @@ const Filme = () => {
     const hasFilme = filmesSalvos.some( ( Salvos ) => Salvos.id === filme.id)
 
     if(hasFilme) {
-      alert("Esse filme ja foi salvo")
+      toast.warn("Esse filme ja foi salvo")
       return;
     }
     filmesSalvos.push(filme);
     localStorage.setItem("@primeflix", JSON.stringify(filmesSalvos));
-    alert("Filme salvo com sucesso")
+    toast.success("Filme salvo com sucesso")
   }
 
   if(loading) {
