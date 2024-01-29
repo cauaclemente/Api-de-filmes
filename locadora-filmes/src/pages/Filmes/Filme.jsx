@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, json } from "react-router-dom";
 import api from "../../Services/api";
 import { CgSpinner } from "react-icons/cg"
 
@@ -40,6 +40,21 @@ const Filme = () => {
     )
   }, [navigate, id])
 
+  function salvarFilmes(){
+    const minhaLista = localStorage.getItem("@primeflix");
+
+    let filmesSalvos = JSON.parse(minhaLista) || [];
+
+    const hasFilme = filmesSalvos.some( ( Salvos ) => Salvos.id === filme.id)
+
+    if(hasFilme) {
+      alert("Esse filme ja foi salvo")
+      return;
+    }
+    filmesSalvos.push(filme);
+    localStorage.setItem("@primeflix", JSON.stringify(filmesSalvos));
+    alert("Filme salvo com sucesso")
+  }
 
   if(loading) {
     return (
@@ -60,7 +75,7 @@ const Filme = () => {
       <span>{filme.overview}</span>
       <strong>Avaliação: {filme.vote_average} /10</strong>
       <div className="area-button">
-        <button>Salvar</button>
+        <button onClick={salvarFilmes}>Salvar</button>
         <button>
           <a 
             target="blank"
