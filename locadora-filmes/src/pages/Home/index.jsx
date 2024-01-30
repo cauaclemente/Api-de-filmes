@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import "./home.css"
 import { CgSpinner } from "react-icons/cg"
 
+
+
 const Home = () => {
 
   const [filmes, setFilmes] = useState([])
@@ -45,7 +47,7 @@ const Home = () => {
           <article key={filmes.id}>
             <strong>{filmes.title}</strong>
             <img src={`https://image.tmdb.org/t/p/original/${filmes.poster_path}`}  alt={filmes.title}/>
-            <Link to={`/filme/${filmes.id}`}> Acessar</Link>
+            <Link to={`/filme/${filmes.id}`}>  Acessar</Link>
           </article>
           )
         })}
